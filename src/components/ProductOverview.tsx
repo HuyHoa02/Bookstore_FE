@@ -1,9 +1,9 @@
 import React from 'react'
-import Product from '../types/Product'
 import { Box, Button, Container, Typography } from '@mui/material'
 import { CheckCircleOutlineSharp, ShoppingCartCheckoutOutlined } from '@mui/icons-material'
+import Book from '../types/Book'
 
-const ProductOverview: React.FC<Product> = ({ image, title, author, price }) => {
+const ProductOverview: React.FC<Book> = ({ id, imageUrl, title, author, price, description, categoryName, stock }) => {
     return (
         <Container
             maxWidth='lg'
@@ -25,7 +25,7 @@ const ProductOverview: React.FC<Product> = ({ image, title, author, price }) => 
                 }}
             >
                 <img
-                    src={image}
+                    src={imageUrl}
                     alt={title}
                     style={{
                         height: '300px',

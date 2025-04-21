@@ -2,7 +2,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css'; // Import Swiper styles
-import ButtonPrimary from './ButtonPrimary';
+import ButtonPrimary from './ui/ButtonPrimary';
 
 const Carousel = () => {
     // Define the structure for your banners (optional if you want to map data)

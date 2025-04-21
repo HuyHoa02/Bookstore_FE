@@ -1,23 +1,24 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Product from '../types/Product';
-import Header from '../components/layout/Header';
-import Footer from '../components/layout/Footer';
 import ProductOverview from '../components/ProductOverview';
-import { Box, Divider } from '@mui/material';
 import ShopNavigator from '../components/ShopNavigator';
+import Book from '../types/Book';
 
 const ProductDetails: React.FC = () => {
     const location = useLocation();
-    const product = location.state as Product;
+    const product = location.state as Book;
 
     return (
         <>
             <ProductOverview
-                image={product.image}
-                title={product.title}
+                id={product.id}
+                imageUrl={product.imageUrl}
                 author={product.author}
                 price={product.price}
+                title={product.title}
+                categoryName={product.categoryName}
+                description={product.description}
+                stock={product.stock}
             />
             <ShopNavigator />
         </>

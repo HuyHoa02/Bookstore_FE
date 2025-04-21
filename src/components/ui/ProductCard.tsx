@@ -1,19 +1,19 @@
 import React from 'react';
 import { Card, CardContent, Typography, Box } from '@mui/material';
 import { Link } from 'react-router-dom'; // import Link
-import Product from '../types/Product';
+import Book from '../../types/Book';
 
-const ProductCard: React.FC<Product> = ({ image, title, author, price }) => {
+const ProductCard: React.FC<Book> = ({ id, imageUrl, title, author, price, description, categoryName, stock }) => {
     return (
         <Link
             to="/products/details"
-            state={{ image, title, author, price }}
+            state={{ id, imageUrl, title, author, price, description, categoryName, stock }}
             style={{ textDecoration: 'none', color: 'inherit' }}
         >
             <Card
                 sx={{
                     width: 250,
-                    maxHeight: 500,
+                    height: 400,
                     boxShadow: 2,
                     p: 1,
                     m: 1,
@@ -26,7 +26,7 @@ const ProductCard: React.FC<Product> = ({ image, title, author, price }) => {
                 {/* Product Image */}
                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                     <img
-                        src={image}
+                        src={imageUrl}
                         alt={title}
                         style={{ height: '220px', objectFit: 'contain' }}
                     />

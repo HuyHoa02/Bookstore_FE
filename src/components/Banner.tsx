@@ -1,5 +1,5 @@
 import { Box, Container, Typography } from '@mui/material'
-import ButtonPrimary from './ButtonPrimary'
+import ButtonPrimary from './ui/ButtonPrimary'
 
 export default function Banner() {
     return (

@@ -1,68 +1,30 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Product from '../types/Product';
-import ProductCard from './ProductCard';
-import ButtonPrimary from './ButtonPrimary';
-
-const products: Product[] = [
-    {
-        title: 'House Of Sky Breath',
-        author: 'Lauren Asher',
-        price: '870',
-        image: '/product-item1.png'
-    },
-    {
-        title: 'HeartLand Stars',
-        author: 'Lauren Asher',
-        price: '870',
-        image: '/product-item2.png'
-    },
-    {
-        title: 'Heavenly Bodies',
-        author: 'Lauren Asher',
-        price: '870',
-        image: '/product-item3.png'
-    },
-    {
-        title: 'His Saving Grace',
-        author: 'Lauren Asher',
-        price: '870',
-        image: '/product-item4.png'
-    },
-    {
-        title: 'My Dearest Darkest',
-        author: 'Lauren Asher',
-        price: '870',
-        image: '/product-item5.png'
-    },
-    {
-        title: 'The Story Of Success',
-        author: 'Lauren Asher',
-        price: '870',
-        image: '/product-item6.png'
-    },
-    {
-        title: 'Echoes Of The Ancients',
-        author: 'Lauren Asher',
-        price: '870',
-        image: '/product-item7.png'
-    },
-    {
-        title: 'The Midnight Garden',
-        author: 'Lauren Asher',
-        price: '870',
-        image: '/product-item8.png'
-    },
-    {
-        title: 'Whispering Winds',
-        author: 'Lauren Asher',
-        price: '870',
-        image: '/product-item9.png'
-    },
-]
+import ProductCard from './ui/ProductCard';
+import ButtonPrimary from './ui/ButtonPrimary';
+import React, { useEffect } from 'react';
+import Book from '../types/Book';
+import api from '../services/api';
 
 export default function ProductCarousel() {
+    const [books, setBooks] = React.useState<Book[] | null>(null);
+
+    useEffect(() => {
+        const fetchBooks = async () => {
+            try {
+                const response = await api.get('/books/all');
+                const { result } = response.data;
+
+                setBooks(result);
+            } catch (error) {
+                console.error('Failed to fetch books:', error);
+            }
+        }
+
+        fetchBooks();
+    }, [])
+
     return (
         <div className="carousel-container">
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
@@ -109,13 +71,18 @@ export default function ProductCarousel() {
                     },
                 }}
             >
-                {products.map((product, index) => (
+                {books?.map((product, index) => (
                     <SwiperSlide key={index}>
                         <ProductCard
-                            image={product.image}
+                            key={index}
+                            id={product.id}
+                            imageUrl={product.imageUrl}
                             author={product.author}
                             price={product.price}
                             title={product.title}
+                            categoryName={product.categoryName}
+                            description={product.description}
+                            stock={product.stock}
                         />
                     </SwiperSlide>
                 ))}
